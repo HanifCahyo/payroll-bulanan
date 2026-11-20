@@ -1,5 +1,5 @@
-import { Head, Link, router, useForm, usePage } from '@inertiajs/react';
-import { useRef, useState, type FormEvent } from 'react';
+import { Head, Link, router, useForm, usePage } from "@inertiajs/react";
+import { useRef, useState, type FormEvent } from "react";
 import {
     AlertCircle,
     ArrowRight,
@@ -15,14 +15,14 @@ import {
     ShieldCheck,
     Trash2,
     X,
-} from 'lucide-react';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import EmptyState from '@/components/EmptyState';
-import payrollEmail from '@/routes/payroll/email';
-import { pdf as payrollPdf } from '@/routes/payroll';
-import employeeRoutes from '@/routes/payroll/employee';
-import { index as payrollIndex } from '@/routes/payroll';
-import { Input } from '@/components/ui/input';
+} from "lucide-react";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import EmptyState from "@/components/EmptyState";
+import payrollEmail from "@/routes/payroll/email";
+import { pdf as payrollPdf } from "@/routes/payroll";
+import employeeRoutes from "@/routes/payroll/employee";
+import { index as payrollIndex } from "@/routes/payroll";
+import { Input } from "@/components/ui/input";
 
 type DecimalValue = number | string;
 type Employee = {
@@ -120,19 +120,19 @@ type EditData = {
     tk: number;
 };
 const money = (value: DecimalValue | null) =>
-    new Intl.NumberFormat('id-ID', {
-        style: 'currency',
-        currency: 'IDR',
+    new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR",
         maximumFractionDigits: 0,
     }).format(Number(value ?? 0));
 const blankEdit: EditData = {
-    nip: '',
-    rekening: '',
-    nama: '',
-    jabatan: '',
-    departemen: '',
-    golongan: '',
-    email: '',
+    nip: "",
+    rekening: "",
+    nama: "",
+    jabatan: "",
+    departemen: "",
+    golongan: "",
+    email: "",
     hadir: 0,
     cuti: 0,
     sakit: 0,
@@ -167,46 +167,46 @@ const blankEdit: EditData = {
 };
 
 const textFields = [
-    ['nama', 'Nama'],
-    ['nip', 'NIP'],
-    ['rekening', 'No. Rekening'],
-    ['jabatan', 'Jabatan'],
-    ['departemen', 'Departemen'],
-    ['golongan', 'Golongan'],
-    ['email', 'Email'],
+    ["nama", "Nama"],
+    ["nip", "NIP"],
+    ["rekening", "No. Rekening"],
+    ["jabatan", "Jabatan"],
+    ["departemen", "Departemen"],
+    ["golongan", "Golongan"],
+    ["email", "Email"],
 ] as const;
 const numberFields = [
-    ['hadir', 'Hadir'],
-    ['cuti', 'Cuti'],
-    ['sakit', 'Sakit'],
-    ['izin', 'Izin'],
-    ['alfa', 'Alfa'],
-    ['tidak_hadir', 'Tidak Hadir'],
-    ['terlambat_menit', 'Terlambat (menit)'],
-    ['gaji_pokok', 'Gaji Pokok'],
-    ['tunjangan_jabatan', 'Tunjangan Jabatan'],
-    ['tunjangan_profesi', 'Tunjangan Profesi'],
-    ['tunjangan_kinerja', 'Tunjangan Kinerja'],
-    ['premi_cuti', 'Premi Cuti'],
-    ['luar_kota', 'Upah Luar Kota'],
-    ['tambahan', 'Tambahan'],
-    ['kesehatan', 'Kesehatan'],
-    ['tanpa_izin', 'Tanpa Izin'],
-    ['terlambat_potongan', 'Potongan Terlambat'],
-    ['simpanan_wajib', 'Simpanan Wajib'],
-    ['koperasi', 'Koperasi'],
-    ['koperasi_ke', 'Angsuran Koperasi Ke'],
-    ['bpjs', 'BPJS'],
-    ['bon', 'Bon'],
-    ['jumlah_gaji', 'Jumlah Gaji'],
-    ['total_gaji', 'Total Gaji'],
-    ['lembur_biasa', 'Lembur Biasa'],
-    ['uth_2_jam', 'UTH 2 Jam'],
-    ['uth_4_jam', 'UTH 4 Jam'],
-    ['lembur_libur', 'Lembur Libur'],
-    ['jumlah_iuran', 'Jumlah Iuran'],
-    ['ksi', 'KSI'],
-    ['tk', 'TK'],
+    ["hadir", "Hadir"],
+    ["cuti", "Cuti"],
+    ["sakit", "Sakit"],
+    ["izin", "Izin"],
+    ["alfa", "Alfa"],
+    ["tidak_hadir", "Tidak Hadir"],
+    ["terlambat_menit", "Terlambat (menit)"],
+    ["gaji_pokok", "Gaji Pokok"],
+    ["tunjangan_jabatan", "Tunjangan Jabatan"],
+    ["tunjangan_profesi", "Tunjangan Profesi"],
+    ["tunjangan_kinerja", "Tunjangan Kinerja"],
+    ["premi_cuti", "Premi Cuti"],
+    ["luar_kota", "Upah Luar Kota"],
+    ["tambahan", "Tambahan"],
+    ["kesehatan", "Kesehatan"],
+    ["tanpa_izin", "Tanpa Izin"],
+    ["terlambat_potongan", "Potongan Terlambat"],
+    ["simpanan_wajib", "Simpanan Wajib"],
+    ["koperasi", "Koperasi"],
+    ["koperasi_ke", "Angsuran Koperasi Ke"],
+    ["bpjs", "BPJS"],
+    ["bon", "Bon"],
+    ["jumlah_gaji", "Jumlah Gaji"],
+    ["total_gaji", "Total Gaji"],
+    ["lembur_biasa", "Lembur Biasa"],
+    ["uth_2_jam", "UTH 2 Jam"],
+    ["uth_4_jam", "UTH 4 Jam"],
+    ["lembur_libur", "Lembur Libur"],
+    ["jumlah_iuran", "Jumlah Iuran"],
+    ["ksi", "KSI"],
+    ["tk", "TK"],
 ] as const;
 
 export default function Detail({
@@ -229,20 +229,20 @@ export default function Detail({
     const [cancelingQueue, setCancelingQueue] = useState(false);
     const [localFlash, setLocalFlash] = useState<{
         message: string;
-        type: 'success' | 'error';
+        type: "success" | "error";
     } | null>(null);
     const { data, setData, put, processing, errors, reset } =
         useForm<EditData>(blankEdit);
     const openEdit = (employee: Employee) => {
         setEditing(employee);
         setData({
-            nip: employee.nip ?? '',
-            rekening: employee.rekening ?? '',
-            nama: employee.nama ?? '',
-            jabatan: employee.jabatan ?? '',
-            departemen: employee.departemen ?? '',
-            golongan: employee.golongan ?? '',
-            email: employee.email ?? '',
+            nip: employee.nip ?? "",
+            rekening: employee.rekening ?? "",
+            nama: employee.nama ?? "",
+            jabatan: employee.jabatan ?? "",
+            departemen: employee.departemen ?? "",
+            golongan: employee.golongan ?? "",
+            email: employee.email ?? "",
             hadir: employee.hadir ?? 0,
             cuti: employee.cuti ?? 0,
             sakit: employee.sakit ?? 0,
@@ -288,17 +288,17 @@ export default function Detail({
             onSuccess: closeEdit,
         });
     };
-    const notify = (message: string, type: 'success' | 'error' = 'success') => {
+    const notify = (message: string, type: "success" | "error" = "success") => {
         setLocalFlash({ message, type });
         window.setTimeout(() => setLocalFlash(null), 4000);
     };
     const removeEmployee = (employee: Employee) => {
-        if (window.confirm(`Hapus data ${employee.nama ?? 'karyawan'}?`))
+        if (window.confirm(`Hapus data ${employee.nama ?? "karyawan"}?`))
             router.delete(employeeRoutes.destroy.url(employee.id), {
                 preserveScroll: true,
-                onSuccess: () => notify('Data karyawan berhasil dihapus.'),
+                onSuccess: () => notify("Data karyawan berhasil dihapus."),
                 onError: () =>
-                    notify('Gagal menghapus data karyawan.', 'error'),
+                    notify("Gagal menghapus data karyawan.", "error"),
             });
     };
     const sendBulk = () => {
@@ -309,7 +309,7 @@ export default function Detail({
         ) {
             notify(
                 `Rentang baris harus 1 sampai ${payrollImport.total_rows}.`,
-                'error',
+                "error",
             );
             return;
         }
@@ -324,11 +324,11 @@ export default function Detail({
     };
     const sendOne = (employee: Employee) => {
         if (!employee.email?.trim()) {
-            notify('Email karyawan belum diisi.', 'error');
+            notify("Email karyawan belum diisi.", "error");
             return;
         }
         if (sendingEmployeeIdsRef.current.has(employee.id)) return;
-        const action = employee.email_sent ? 'Kirim ulang' : 'Kirim';
+        const action = employee.email_sent ? "Kirim ulang" : "Kirim";
         if (!window.confirm(`${action} slip gaji ke ${employee.email}?`))
             return;
 
@@ -353,7 +353,7 @@ export default function Detail({
     const processQueue = () => {
         setProcessingQueue(true);
         router.post(
-            '/payroll/process-queue',
+            "/payroll/process-queue",
             {},
             {
                 preserveScroll: true,
@@ -366,7 +366,7 @@ export default function Detail({
             return;
         setCancelingQueue(true);
         router.post(
-            '/payroll/cancel-queue',
+            "/payroll/cancel-queue",
             {},
             {
                 preserveScroll: true,
@@ -376,10 +376,10 @@ export default function Detail({
     };
     const activeError =
         flash?.error ??
-        (localFlash?.type === 'error' ? localFlash.message : undefined);
+        (localFlash?.type === "error" ? localFlash.message : undefined);
     const activeSuccess =
         flash?.success ??
-        (localFlash?.type === 'success' ? localFlash.message : undefined);
+        (localFlash?.type === "success" ? localFlash.message : undefined);
     const activeInfo = flash?.info;
 
     return (
@@ -401,8 +401,8 @@ export default function Detail({
                             Data Payroll
                         </h1>
                         <p className="mt-2 text-sm text-slate-500">
-                            {payrollImport.period} ·{' '}
-                            {payrollImport.period_range} ·{' '}
+                            {payrollImport.period} ·{" "}
+                            {payrollImport.period_range} ·{" "}
                             {payrollImport.total_rows} karyawan
                         </p>
                     </div>
@@ -418,10 +418,10 @@ export default function Detail({
                     <div
                         className={`rounded-2xl border p-4 text-sm shadow-sm ${
                             activeError
-                                ? 'border-rose-200 bg-rose-50 text-rose-800'
+                                ? "border-rose-200 bg-rose-50 text-rose-800"
                                 : activeInfo
-                                  ? 'border-sky-200 bg-sky-50 text-sky-800'
-                                  : 'border-emerald-200 bg-emerald-50 text-emerald-800'
+                                  ? "border-sky-200 bg-sky-50 text-sky-800"
+                                  : "border-emerald-200 bg-emerald-50 text-emerald-800"
                         }`}
                     >
                         <div className="flex items-start gap-3">
@@ -435,10 +435,10 @@ export default function Detail({
                             <div>
                                 <p className="font-semibold">
                                     {activeError
-                                        ? 'Gagal mengirim'
+                                        ? "Gagal mengirim"
                                         : activeInfo
-                                          ? 'Informasi pengiriman'
-                                          : 'Berhasil'}
+                                          ? "Informasi pengiriman"
+                                          : "Berhasil"}
                                 </p>
                                 <p className="mt-1 text-xs opacity-90">
                                     {activeError || activeSuccess || activeInfo}
@@ -496,17 +496,17 @@ export default function Detail({
                                     disabled={sending}
                                     className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700 disabled:opacity-50"
                                 >
-                                    <Send className="size-4" />{' '}
+                                    <Send className="size-4" />{" "}
                                     {sending
-                                        ? 'Mengirim...'
-                                        : 'Kirim slip gaji'}
+                                        ? "Mengirim..."
+                                        : "Kirim slip gaji"}
                                 </button>
                             </div>
                         </div>
                         <div className="mt-6 flex flex-col gap-3 border-t border-slate-100 pt-5 lg:flex-row lg:items-center lg:justify-between">
                             <div className="flex items-center gap-2 text-xs text-slate-600">
                                 <span
-                                    className={`size-2.5 rounded-full ${pendingJobsCount > 0 ? 'bg-amber-500' : 'bg-emerald-500'}`}
+                                    className={`size-2.5 rounded-full ${pendingJobsCount > 0 ? "bg-amber-500" : "bg-emerald-500"}`}
                                 />
                                 <span className="font-semibold text-slate-900">
                                     {pendingJobsCount} Antrean Email (Pending)
@@ -521,9 +521,9 @@ export default function Detail({
                                         disabled={cancelingQueue}
                                         className="inline-flex items-center gap-2 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-2.5 text-xs font-semibold text-rose-700"
                                     >
-                                        <Ban className="size-3.5" />{' '}
+                                        <Ban className="size-3.5" />{" "}
                                         {cancelingQueue
-                                            ? 'Membatalkan...'
+                                            ? "Membatalkan..."
                                             : `Batalkan Antrean (${pendingJobsCount})`}
                                     </button>
                                 )}
@@ -533,10 +533,10 @@ export default function Detail({
                                     disabled={processingQueue}
                                     className="inline-flex items-center gap-2 rounded-2xl bg-slate-900 px-4 py-2.5 text-xs font-semibold text-white"
                                 >
-                                    <Play className="size-3.5 fill-emerald-400 text-emerald-400" />{' '}
+                                    <Play className="size-3.5 fill-emerald-400 text-emerald-400" />{" "}
                                     {processingQueue
-                                        ? 'Memproses...'
-                                        : 'Jalankan Queue Worker'}
+                                        ? "Memproses..."
+                                        : "Jalankan Queue Worker"}
                                 </button>
                             </div>
                         </div>
@@ -594,15 +594,15 @@ export default function Detail({
                         <thead className="bg-slate-50 text-xs tracking-wide text-slate-500 uppercase">
                             <tr>
                                 {[
-                                    '#',
-                                    'NIP',
-                                    'Nama',
-                                    'Departemen',
-                                    'Gaji Pokok',
-                                    'Total Gaji',
-                                    'Email',
-                                    'Status',
-                                    'Aksi',
+                                    "#",
+                                    "NIP",
+                                    "Nama",
+                                    "Departemen",
+                                    "Gaji Pokok",
+                                    "Total Gaji",
+                                    "Email",
+                                    "Status",
+                                    "Aksi",
                                 ].map((heading) => (
                                     <th
                                         key={heading}
@@ -630,32 +630,36 @@ export default function Detail({
                                             {employee.row_number}
                                         </td>
                                         <td className="px-4 py-4">
-                                            {employee.nip || '-'}
+                                            {employee.nip || "-"}
                                         </td>
                                         <td className="px-4 py-4 font-medium">
-                                            {employee.nama || '-'}
+                                            {employee.nama || "-"}
                                         </td>
                                         <td className="px-4 py-4">
-                                            {employee.departemen || '-'}
+                                            {employee.departemen || "-"}
                                         </td>
                                         <td className="px-4 py-4">
                                             {money(employee.gaji_pokok)}
                                         </td>
                                         <td className="px-4 py-4">
-                                            {money(employee.total_gaji)}
+                                            {money(
+                                                Number(
+                                                    employee.total_gaji ?? 0,
+                                                ) + Number(employee.bon ?? 0),
+                                            )}
                                         </td>
                                         <td className="px-4 py-4">
-                                            {employee.email || '-'}
+                                            {employee.email || "-"}
                                         </td>
                                         <td className="px-4 py-4">
                                             {employee.email_sent ? (
                                                 <span className="inline-flex items-center gap-1 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700">
-                                                    <MailCheck className="size-3.5" />{' '}
+                                                    <MailCheck className="size-3.5" />{" "}
                                                     Terkirim
                                                 </span>
                                             ) : (
                                                 <span className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-medium text-slate-500">
-                                                    <Mail className="size-3.5" />{' '}
+                                                    <Mail className="size-3.5" />{" "}
                                                     Pending
                                                 </span>
                                             )}
@@ -675,10 +679,10 @@ export default function Detail({
                                                         sendingEmployeeIds.has(
                                                             employee.id,
                                                         )
-                                                            ? 'Sedang mengirim...'
+                                                            ? "Sedang mengirim..."
                                                             : employee.email_sent
-                                                              ? 'Kirim ulang slip gaji'
-                                                              : 'Kirim slip gaji'
+                                                              ? "Kirim ulang slip gaji"
+                                                              : "Kirim slip gaji"
                                                     }
                                                 >
                                                     {employee.email_sent ? (
@@ -779,19 +783,19 @@ export default function Detail({
                                         min="0"
                                         step={
                                             [
-                                                'hadir',
-                                                'cuti',
-                                                'sakit',
-                                                'izin',
-                                                'alfa',
-                                                'tidak_hadir',
-                                                'terlambat_menit',
-                                                'koperasi_ke',
-                                                'uth_2_jam',
-                                                'uth_4_jam',
+                                                "hadir",
+                                                "cuti",
+                                                "sakit",
+                                                "izin",
+                                                "alfa",
+                                                "tidak_hadir",
+                                                "terlambat_menit",
+                                                "koperasi_ke",
+                                                "uth_2_jam",
+                                                "uth_4_jam",
                                             ].includes(field)
-                                                ? '1'
-                                                : '0.01'
+                                                ? "1"
+                                                : "0.01"
                                         }
                                         value={data[field]}
                                         onChange={(event) =>
@@ -823,8 +827,8 @@ export default function Detail({
                                 className="rounded-xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white"
                             >
                                 {processing
-                                    ? 'Menyimpan...'
-                                    : 'Simpan perubahan'}
+                                    ? "Menyimpan..."
+                                    : "Simpan perubahan"}
                             </button>
                         </div>
                     </form>

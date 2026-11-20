@@ -44,6 +44,7 @@ class PayrollController extends Controller
         'koperasi_ke' => 'ANGS KE',
         'bpjs' => 'Potongan BPJS',
         'bon' => 'Bon',
+        'jumlah_gaji' => 'Jmlh Gaji',
         'total_gaji' => 'Jumlah',
         'lembur_biasa' => 'LEMBUR BIASA',
         'uth_2_jam' => 'UTH 2 Jam',

@@ -369,7 +369,9 @@
                                     Periode: {{ $employee->import->period }}
                                 </div>
                             </td>
-                            <td class="total-val">{{ $rp($employee->total_gaji) }}</td>
+                            <td class="total-val">
+                                {{ $rp((float) $employee->total_gaji + (float) $employee->bon) }}
+                            </td>
                         </tr>
                     </table>
                 </td>
