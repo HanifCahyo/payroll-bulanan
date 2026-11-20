@@ -293,34 +293,18 @@
                             <td class="col-name">Pokok (Kehadiran {{ $employee->hadir }})</td>
                             <td class="col-amt">{{ $rp($employee->gaji_pokok) }}</td>
                         </tr>
-                        <tr>
+                        {{-- <tr>
                             <td class="col-name">Jabatan</td>
                             <td class="col-amt">{{ $rp($employee->tunjangan_jabatan) }}</td>
                         </tr>
                         <tr>
                             <td class="col-name">Profesi</td>
                             <td class="col-amt">{{ $rp($employee->tunjangan_profesi) }}</td>
-                        </tr>
-                    </table>
-
-                    <div class="sec-title">CUTI</div>
-                    <table class="data-table">
-                        <tr>
-                            <td class="col-name">Cuti dan Premi</td>
-                            <td class="col-amt">{{ $rp($employee->premi_cuti) }}</td>
-                        </tr>
+                        </tr> --}}
                     </table>
 
                     <div class="sec-title">LEMBUR / TAMBAHAN</div>
                     <table class="data-table">
-                        <tr>
-                            <td class="col-name">Jam</td>
-                            <td class="col-amt">{{ $rp($employee->lembur_biasa) }}</td>
-                        </tr>
-                        <tr>
-                            <td class="col-name">Hari Libur</td>
-                            <td class="col-amt">{{ $rp($employee->lembur_libur) }}</td>
-                        </tr>
                         <tr>
                             <td class="col-name">Tambahan</td>
                             <td class="col-amt">{{ $rp($employee->tambahan) }}</td>
@@ -359,8 +343,8 @@
                             <td class="col-amt">{{ $rp($employee->koperasi) }}</td>
                         </tr>
                         <tr>
-                            <td class="col-name">Bon</td>
-                            <td class="col-amt">{{ $rp($employee->bon) }}</td>
+                            <td class="col-name">Simpanan Wajib</td>
+                            <td class="col-amt">{{ $rp($employee->simpanan_wajib) }}</td>
                         </tr>
                         <tr>
                             <td class="col-name">BPJS</td>
@@ -374,10 +358,7 @@
                             <td class="col-name">Tanpa Ijin</td>
                             <td class="col-amt">{{ $rp($employee->tanpa_izin) }}</td>
                         </tr>
-                        <tr>
-                            <td class="col-name">Simpanan Wajib</td>
-                            <td class="col-amt">{{ $rp($employee->simpanan_wajib) }}</td>
-                        </tr>
+
                     </table>
 
                     <table class="total-card">
